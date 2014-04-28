@@ -1,5 +1,7 @@
 package com.twmacinta.util;
 
+import java.util.Arrays;
+
 /**
  * Fast implementation of RSA's MD5 hash generator in Java JDK Beta-2 or higher<br>
  * Originally written by Santeri Paavolainen, Helsinki Finland 1996 <br>
@@ -34,14 +36,14 @@ package com.twmacinta.util;
  * @author	Timothy W Macinta (twm@alum.mit.edu) (optimizations and bug fixes)
  **/
 
-class MD5State {
+public class MD5State {
   /**
    * 128-bit state 
    */
   int	state[];
   
   /**
-   * 64-bit character count
+   * 64-bit bytes counter (MD5 algorithm needs bits, we convert this value where needed) 
    */
   long count;
   
@@ -50,11 +52,15 @@ class MD5State {
    */
   byte	buffer[];
 
+  /**
+   * Default state corresponding to no digested data.
+   */
   public MD5State() {
     buffer = new byte[64];
     count = 0;
     state = new int[4];
     
+    // Default values for MD5 algorithm
     state[0] = 0x67452301;
     state[1] = 0xefcdab89;
     state[2] = 0x98badcfe;
@@ -76,4 +82,17 @@ class MD5State {
     
     this.count = from.count;
   }
-};
+  
+  public String toString() {
+    return "MD5State{state=[" + state[0] + ", " + state[1] + ", " + state[2] + ", " + state[3] + "], count=" + count + "}";
+  }
+  
+  public boolean equals(Object obj) {
+    if (!(obj instanceof MD5State)) {
+      return false;
+    }
+    
+    MD5State other = (MD5State) obj;
+    return Arrays.equals(this.state, other.state) && this.count == other.count && Arrays.equals(this.buffer, other.buffer);
+  }
+}

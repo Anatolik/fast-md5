@@ -5,10 +5,11 @@
     <groupId>com.twmacinta</groupId>
     <artifactId>fast-md5</artifactId>
     <packaging>jar</packaging>
-    <version>2.7.1</version>
+    <version>2.7.1-patch</version>
 
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>src</testSourceDirectory>
 
         <plugins>
             <plugin>

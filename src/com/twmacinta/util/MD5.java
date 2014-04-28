@@ -893,5 +893,19 @@ public class MD5 {
         }
         return true;
     }
+
+    /**
+     * Set stored state for resuming MD5 operation.
+     */
+    public void setState(MD5State state) {
+    	this.state = new MD5State(state);
+    	this.finals = null;
+    }
     
+    /**
+     * @return copy current state of MD5 engine. Can be used for appending more data at later time.
+     */
+    public MD5State getState() {
+        return new MD5State(state);
+    }
 }
